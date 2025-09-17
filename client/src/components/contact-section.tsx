@@ -1,11 +1,12 @@
 import { useState } from "react";
-import { Mail, Phone, Linkedin, Github, Download, Calendar, Send } from "lucide-react";
+import { Mail, Phone, Linkedin, Github, Download, Calendar, Send, X } from "lucide-react";
 import { personalInfo } from "@/data/portfolio-data";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
 
 export default function ContactSection() {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showScheduleModal, setShowScheduleModal] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -111,11 +112,20 @@ export default function ContactSection() {
             <div className="pt-8 border-t border-border">
               <h4 className="font-semibold mb-4">Quick Links</h4>
               <div className="flex flex-wrap gap-4">
-                <button className="bg-primary text-primary-foreground px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors" data-testid="button-download-resume">
+                <a 
+                  href="/resume.pdf" 
+                  download="Ishaan_Goswami_Resume.pdf"
+                  className="inline-flex items-center bg-primary text-primary-foreground px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors" 
+                  data-testid="button-download-resume"
+                >
                   <Download className="w-4 h-4 mr-2" />
                   Download Resume
-                </button>
-                <button className="border border-border px-4 py-2 rounded-lg hover:bg-accent transition-colors" data-testid="button-schedule-call">
+                </a>
+                <button 
+                  onClick={() => setShowScheduleModal(true)}
+                  className="inline-flex items-center border border-border px-4 py-2 rounded-lg hover:bg-accent transition-colors" 
+                  data-testid="button-schedule-call"
+                >
                   <Calendar className="w-4 h-4 mr-2" />
                   Schedule Call
                 </button>
@@ -205,6 +215,74 @@ export default function ContactSection() {
           </div>
         </div>
       </div>
+
+      {/* Schedule Call Modal */}
+      {showScheduleModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50" data-testid="schedule-modal">
+          <div className="bg-white dark:bg-card p-8 rounded-xl shadow-lg max-w-md w-full mx-4">
+            <div className="flex justify-between items-center mb-6">
+              <h3 className="text-xl font-semibold">Schedule a Call</h3>
+              <button 
+                onClick={() => setShowScheduleModal(false)}
+                className="text-muted-foreground hover:text-foreground"
+                data-testid="button-close-modal"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+            
+            <div className="space-y-4">
+              <p className="text-muted-foreground">
+                I'd love to discuss opportunities, projects, or answer any questions you might have. Here are the best ways to schedule a call:
+              </p>
+              
+              <div className="space-y-3">
+                <div className="p-4 border border-border rounded-lg">
+                  <h4 className="font-medium mb-2">Direct Contact</h4>
+                  <p className="text-sm text-muted-foreground mb-3">
+                    Send me an email with your preferred times and I'll get back to you within 24 hours.
+                  </p>
+                  <a 
+                    href={`mailto:${personalInfo.email}?subject=Schedule Call Request`}
+                    className="inline-flex items-center text-primary hover:text-primary/80 text-sm font-medium"
+                    data-testid="link-email-schedule"
+                  >
+                    <Mail className="w-4 h-4 mr-2" />
+                    Email to Schedule
+                  </a>
+                </div>
+                
+                <div className="p-4 border border-border rounded-lg">
+                  <h4 className="font-medium mb-2">LinkedIn Message</h4>
+                  <p className="text-sm text-muted-foreground mb-3">
+                    Connect with me on LinkedIn and send a message with your availability.
+                  </p>
+                  <a 
+                    href={personalInfo.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center text-primary hover:text-primary/80 text-sm font-medium"
+                    data-testid="link-linkedin-schedule"
+                  >
+                    <Linkedin className="w-4 h-4 mr-2" />
+                    Connect on LinkedIn
+                  </a>
+                </div>
+              </div>
+              
+              <div className="mt-6">
+                <button 
+                  onClick={() => setShowScheduleModal(false)}
+                  className="w-full bg-primary text-primary-foreground py-2 px-4 rounded-lg hover:bg-primary/90 transition-colors"
+                  data-testid="button-close-schedule-modal"
+                >
+                  Got it, thanks!
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 }
