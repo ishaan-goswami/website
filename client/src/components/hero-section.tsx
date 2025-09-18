@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { personalInfo } from "@/data/portfolio-data";
+import myPhoto from "@/assets/me.png";
 
 export default function HeroSection() {
   // Smooth scroll handler
