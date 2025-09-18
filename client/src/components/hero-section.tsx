@@ -29,7 +29,7 @@ export default function HeroSection() {
         >
           <div className="w-44 h-44 rounded-full p-1 bg-gradient-to-tr from-indigo-400 via-fuchsia-400 to-pink-400 shadow-2xl">
             <img
-              src="/public/Headshot.jpg"
+              src="/Headshot.jpg"
               alt="My headshot"
               className="w-full h-full rounded-full object-cover border-4 border-black"
             />
