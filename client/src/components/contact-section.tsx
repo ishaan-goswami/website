@@ -117,7 +117,7 @@ export default function ContactSection() {
               <h4 className="font-semibold mb-4">Quick Links</h4>
               <div className="flex flex-wrap gap-4">
                 <a
-                  href="/resume.pdf"
+                  href="/website/resume.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary/90 transition-all"
