@@ -1,82 +1,70 @@
-import { User } from "lucide-react";
-import { personalInfo, stats } from "@/data/portfolio-data";
+import { motion } from "framer-motion";
+import { personalInfo } from "@/data/portfolio-data";
 
 export default function HeroSection() {
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+  // Smooth scroll handler
+  const scrollToSection = (id: string) => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth" });
     }
   };
 
   return (
-    <>
-      {/* Hero Section */}
-      <section className="hero-gradient text-primary-foreground pt-24 pb-20 px-4 sm:px-6 lg:px-8" data-testid="hero-section">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div className="animate-fade-in">
-              <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight" data-testid="hero-name">
-                {personalInfo.name}
-              </h1>
-              <p className="text-xl md:text-2xl mb-6 opacity-90" data-testid="hero-title">
-                {personalInfo.title}
-              </p>
-              <div className="prose prose-lg text-primary-foreground/90 mb-8">
-                <p data-testid="hero-biography">
-                  {personalInfo.biography}
-                </p>
-              </div>
-              <div className="flex flex-wrap gap-4">
-                <button 
-                  onClick={() => scrollToSection('contact')}
-                  className="bg-primary-foreground text-primary px-6 py-3 rounded-lg font-semibold hover:bg-opacity-90 transition-all"
-                  data-testid="button-get-in-touch"
-                >
-                  Get In Touch
-                </button>
-                <button 
-                  onClick={() => scrollToSection('projects')}
-                  className="border-2 border-primary-foreground text-primary-foreground px-6 py-3 rounded-lg font-semibold hover:bg-primary-foreground hover:text-primary transition-all"
-                  data-testid="button-view-projects"
-                >
-                  View Projects
-                </button>
-              </div>
-            </div>
-            
-            <div className="flex justify-center">
-              <div className="w-80 h-80 bg-primary-foreground/20 rounded-full flex items-center justify-center border-4 border-primary-foreground/30" data-testid="profile-placeholder">
-                <User className="w-24 h-24 text-primary-foreground/60" />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+    <section
+      className="relative min-h-[calc(100vh-4rem)] flex flex-col items-center justify-center overflow-hidden bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white pt-24 pb-24 px-6"
+      data-testid="hero-section"
+    >
+      {/* Animated gradient blobs */}
+      <div className="absolute -top-40 -left-40 w-96 h-96 bg-fuchsia-500 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse"></div>
+      <div className="absolute -bottom-40 -right-40 w-96 h-96 bg-indigo-500 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse"></div>
 
-      {/* Quick Stats */}
-      <section className="py-16 bg-card" data-testid="stats-section">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-            <div className="animate-fade-in" data-testid="stat-experience">
-              <div className="text-3xl font-bold text-primary mb-2">{stats.experience}</div>
-              <div className="text-muted-foreground">Years Experience</div>
-            </div>
-            <div className="animate-fade-in" data-testid="stat-projects">
-              <div className="text-3xl font-bold text-primary mb-2">{stats.projects}</div>
-              <div className="text-muted-foreground">Projects Completed</div>
-            </div>
-            <div className="animate-fade-in" data-testid="stat-technologies">
-              <div className="text-3xl font-bold text-primary mb-2">{stats.technologies}</div>
-              <div className="text-muted-foreground">Technologies</div>
-            </div>
-            <div className="animate-fade-in" data-testid="stat-students">
-              <div className="text-3xl font-bold text-primary mb-2">{stats.students}</div>
-              <div className="text-muted-foreground">Students Taught</div>
-            </div>
+      <div className="relative z-10 flex flex-col items-center gap-10 text-center max-w-3xl">
+        {/* Headshot with glowing ring */}
+        <motion.div
+          initial={{ opacity: 0, y: -30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="mt-6"
+        >
+          <div className="w-44 h-44 rounded-full p-1 bg-gradient-to-tr from-indigo-400 via-fuchsia-400 to-pink-400 shadow-2xl">
+            <img
+              src="/Headshot.jpg"
+              alt="My headshot"
+              className="w-full h-full rounded-full object-cover border-4 border-black"
+            />
           </div>
-        </div>
-      </section>
-    </>
+        </motion.div>
+
+        {/* Intro text */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="w-full"
+        >
+          <h1 className="text-5xl md:text-6xl font-extrabold mb-4 leading-tight bg-gradient-to-r from-indigo-400 via-fuchsia-400 to-pink-400 bg-clip-text text-transparent">
+            {personalInfo.name}
+          </h1>
+          <p className="text-xl md:text-2xl mb-6 opacity-90">{personalInfo.title}</p>
+          <p className="text-lg opacity-80 mb-8">{personalInfo.biography}</p>
+
+          <div className="flex gap-6 justify-center flex-wrap">
+            <button
+              onClick={() => scrollToSection("projects")}
+              className="px-8 py-4 rounded-lg bg-gradient-to-r from-indigo-500 to-fuchsia-500 text-white font-semibold shadow-lg transition-all duration-300 transform hover:scale-105 hover:shadow-xl"
+            >
+              View Projects
+            </button>
+            <button
+              onClick={() => scrollToSection("contact")}
+              className="px-8 py-4 rounded-lg border-2 border-white text-white font-semibold transition-all duration-300 transform hover:scale-105 hover:bg-white hover:text-black hover:shadow-xl"
+            >
+              Get In Touch
+            </button>
+          </div>
+        </motion.div>
+      </div>
+    </section>
   );
 }

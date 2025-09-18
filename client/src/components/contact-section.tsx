@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Mail, Phone, Linkedin, Github, Download, Calendar, Send, X } from "lucide-react";
+import { Mail, Phone, Linkedin, Github, Calendar, Send, X } from "lucide-react";
 import { personalInfo } from "@/data/portfolio-data";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
@@ -69,7 +69,8 @@ export default function ContactSection() {
             <div>
               <h3 className="text-2xl font-semibold mb-6">Get In Touch</h3>
               <div className="space-y-4">
-                <div className="flex items-center" data-testid="contact-email">
+                {/* Email */}
+                <div className="flex items-center p-4 rounded-lg transition-all hover:bg-card hover:shadow-md cursor-pointer" data-testid="contact-email">
                   <Mail className="text-primary mr-4 w-5 h-5" />
                   <div>
                     <p className="font-medium">Email</p>
@@ -78,7 +79,8 @@ export default function ContactSection() {
                     </a>
                   </div>
                 </div>
-                <div className="flex items-center" data-testid="contact-phone">
+                {/* Phone */}
+                <div className="flex items-center p-4 rounded-lg transition-all hover:bg-card hover:shadow-md cursor-pointer" data-testid="contact-phone">
                   <Phone className="text-primary mr-4 w-5 h-5" />
                   <div>
                     <p className="font-medium">Phone</p>
@@ -87,7 +89,8 @@ export default function ContactSection() {
                     </a>
                   </div>
                 </div>
-                <div className="flex items-center" data-testid="contact-linkedin">
+                {/* LinkedIn */}
+                <div className="flex items-center p-4 rounded-lg transition-all hover:bg-card hover:shadow-md cursor-pointer" data-testid="contact-linkedin">
                   <Linkedin className="text-primary mr-4 w-5 h-5" />
                   <div>
                     <p className="font-medium">LinkedIn</p>
@@ -96,7 +99,8 @@ export default function ContactSection() {
                     </a>
                   </div>
                 </div>
-                <div className="flex items-center" data-testid="contact-github">
+                {/* GitHub */}
+                <div className="flex items-center p-4 rounded-lg transition-all hover:bg-card hover:shadow-md cursor-pointer" data-testid="contact-github">
                   <Github className="text-primary mr-4 w-5 h-5" />
                   <div>
                     <p className="font-medium">GitHub</p>
@@ -112,18 +116,18 @@ export default function ContactSection() {
             <div className="pt-8 border-t border-border">
               <h4 className="font-semibold mb-4">Quick Links</h4>
               <div className="flex flex-wrap gap-4">
-                <a 
-                  href="/resume.pdf" 
-                  download="Ishaan_Goswami_Resume.pdf"
-                  className="inline-flex items-center bg-primary text-primary-foreground px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors" 
-                  data-testid="button-download-resume"
+                <a
+                  href="/resume.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary/90 transition-all"
                 >
-                  <Download className="w-4 h-4 mr-2" />
-                  Download Resume
+                  View Resume
                 </a>
+
                 <button 
                   onClick={() => setShowScheduleModal(true)}
-                  className="inline-flex items-center border border-border px-4 py-2 rounded-lg hover:bg-accent transition-colors" 
+                  className="inline-flex items-center border border-border px-4 py-2 rounded-lg hover:bg-accent hover:shadow-md transition-all" 
                   data-testid="button-schedule-call"
                 >
                   <Calendar className="w-4 h-4 mr-2" />
@@ -134,7 +138,7 @@ export default function ContactSection() {
           </div>
           
           {/* Contact Form */}
-          <div className="bg-card p-8 rounded-xl shadow-sm" data-testid="contact-form">
+          <div className="bg-card p-8 rounded-xl shadow-sm hover:shadow-lg transition-all" data-testid="contact-form">
             <h3 className="text-xl font-semibold mb-6">Send a Message</h3>
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
@@ -146,7 +150,7 @@ export default function ContactSection() {
                   required
                   value={formData.name}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-3 rounded-lg border border-input bg-background focus:ring-2 focus:ring-ring focus:border-transparent transition-colors" 
+                  className="w-full px-4 py-3 rounded-lg border border-input bg-background focus:ring-2 focus:ring-ring focus:border-transparent transition-colors hover:border-primary" 
                   placeholder="Enter your full name"
                   data-testid="input-name"
                 />
@@ -161,7 +165,7 @@ export default function ContactSection() {
                   required
                   value={formData.email}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-3 rounded-lg border border-input bg-background focus:ring-2 focus:ring-ring focus:border-transparent transition-colors" 
+                  className="w-full px-4 py-3 rounded-lg border border-input bg-background focus:ring-2 focus:ring-ring focus:border-transparent transition-colors hover:border-primary" 
                   placeholder="Enter your email address"
                   data-testid="input-email"
                 />
@@ -175,7 +179,7 @@ export default function ContactSection() {
                   required
                   value={formData.subject}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-3 rounded-lg border border-input bg-background focus:ring-2 focus:ring-ring focus:border-transparent transition-colors"
+                  className="w-full px-4 py-3 rounded-lg border border-input bg-background focus:ring-2 focus:ring-ring focus:border-transparent transition-colors hover:border-primary"
                   data-testid="select-subject"
                 >
                   <option value="">Select a subject</option>
@@ -196,7 +200,7 @@ export default function ContactSection() {
                   required
                   value={formData.message}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-3 rounded-lg border border-input bg-background focus:ring-2 focus:ring-ring focus:border-transparent transition-colors resize-none" 
+                  className="w-full px-4 py-3 rounded-lg border border-input bg-background focus:ring-2 focus:ring-ring focus:border-transparent transition-colors hover:border-primary resize-none" 
                   placeholder="Tell me about your project, opportunity, or how I can help..."
                   data-testid="textarea-message"
                 />
@@ -205,7 +209,7 @@ export default function ContactSection() {
               <button 
                 type="submit" 
                 disabled={isSubmitting}
-                className="w-full bg-primary text-primary-foreground py-3 px-6 rounded-lg font-semibold hover:bg-primary/90 transition-colors focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full bg-primary text-primary-foreground py-3 px-6 rounded-lg font-semibold hover:bg-primary/90 hover:shadow-md transition-all focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
                 data-testid="button-submit"
               >
                 <Send className="w-4 h-4 mr-2" />
@@ -224,7 +228,7 @@ export default function ContactSection() {
               <h3 className="text-xl font-semibold">Schedule a Call</h3>
               <button 
                 onClick={() => setShowScheduleModal(false)}
-                className="text-muted-foreground hover:text-foreground"
+                className="text-muted-foreground hover:text-primary transition-colors"
                 data-testid="button-close-modal"
               >
                 <X className="w-5 h-5" />
@@ -237,7 +241,7 @@ export default function ContactSection() {
               </p>
               
               <div className="space-y-3">
-                <div className="p-4 border border-border rounded-lg">
+                <div className="p-4 border border-border rounded-lg hover:bg-accent hover:shadow-md transition-all">
                   <h4 className="font-medium mb-2">Direct Contact</h4>
                   <p className="text-sm text-muted-foreground mb-3">
                     Send me an email with your preferred times and I'll get back to you within 24 hours.
@@ -252,7 +256,7 @@ export default function ContactSection() {
                   </a>
                 </div>
                 
-                <div className="p-4 border border-border rounded-lg">
+                <div className="p-4 border border-border rounded-lg hover:bg-accent hover:shadow-md transition-all">
                   <h4 className="font-medium mb-2">LinkedIn Message</h4>
                   <p className="text-sm text-muted-foreground mb-3">
                     Connect with me on LinkedIn and send a message with your availability.
@@ -273,7 +277,7 @@ export default function ContactSection() {
               <div className="mt-6">
                 <button 
                   onClick={() => setShowScheduleModal(false)}
-                  className="w-full bg-primary text-primary-foreground py-2 px-4 rounded-lg hover:bg-primary/90 transition-colors"
+                  className="w-full bg-primary text-primary-foreground py-2 px-4 rounded-lg hover:bg-primary/90 hover:shadow-md transition-all"
                   data-testid="button-close-schedule-modal"
                 >
                   Got it, thanks!

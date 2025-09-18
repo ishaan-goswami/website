@@ -1,6 +1,6 @@
 export const personalInfo = {
   name: "Ishaan Goswami",
-  title: "Software Engineer & AI/ML Specialist",
+  title: "Software Engineer",
   email: "ishaangoswami8@gmail.com",
   phone: "678-516-1756",
   linkedin: "https://linkedin.com/in/ishaan-goswami",
@@ -22,7 +22,7 @@ export const education = {
     "Artificial Intelligence",
     "Computer Systems and Networks",
     "Applied Combinatorics",
-    "Graduate Machine Learning & Computer Vision",
+    "Machine Learning & Computer Vision",
     "Probability & Statistics"
   ]
 };
